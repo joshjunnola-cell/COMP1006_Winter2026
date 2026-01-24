@@ -11,7 +11,8 @@
 require "connect.php";
 require "header.php";
 include "itemList.php";
-
-
-
 require "footer.php";
+
+/*------- What's one thing you learned from this lab that you will apply in Course Project Phase One? -------*/  
+
+/* I will definitely be adding the file logic learned here with php as it provides better maintainability as stated in the lab */
