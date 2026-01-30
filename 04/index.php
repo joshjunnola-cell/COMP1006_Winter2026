@@ -11,10 +11,10 @@
         <label for="last_name">Last name</label>
         <input type="text" id="last_name" name="last_name">
         <label for="phone">Phone number</label>
-        <input type="text" id="phone" name="phone" placeholder="555-123-4567">
+        <input type="tel" id="phone" name="phone" placeholder="555-123-4567">
         <label for="address">Address</label>
         <input type="text" id="address" name="address">
-        <label for="email">Address</label>
+        <label for="email">Email</label>
         <input type="text" id="email" name="email">
     </fieldset>
 
@@ -38,7 +38,7 @@
             <th scope="row">Chaos Croissant 🥐</th>
             <td>
               <label for="chaos_croissant" class="visually-hidden">Chaos Croissant quantity</label>
-              <input type="text" id="chaos_croissant" name="items[chaos_croissant]" min="0" max="24" value="0">
+              <input type="number" id="chaos_croissant" name="items[chaos_croissant]" min="0" max="24" value="0">
             </td>
           </tr>
 
@@ -46,7 +46,7 @@
             <th scope="row">Midnight Muffin 🌙</th>
             <td>
               <label for="midnight_muffin" class="visually-hidden">Midnight Muffin quantity</label>
-              <input type="text" id="midnight_muffin" name="items[midnight_muffin]" min="0" max="24" value="0">
+              <input type="number" id="midnight_muffin" name="items[midnight_muffin]" min="0" max="24" value="0">
             </td>
           </tr>
 
@@ -54,7 +54,7 @@
             <th scope="row">Existential Éclair 🤔</th>
             <td>
               <label for="existential_eclair" class="visually-hidden">Existential Éclair quantity</label>
-              <input type="text" id="existential_eclair" name="items[existential_eclair]" min="0" max="24"
+              <input type="number" id="existential_eclair" name="items[existential_eclair]" min="0" max="24"
                 value="0">
             </td>
           </tr>
@@ -63,7 +63,7 @@
             <th scope="row">Procrastination Cookie ⏰</th>
             <td>
               <label for="procrastination_cookie" class="visually-hidden">Procrastination Cookie quantity</label>
-              <input type="text" id="procrastination_cookie" name="items[procrastination_cookie]" min="0" max="24"
+              <input type="number" id="procrastination_cookie" name="items[procrastination_cookie]" min="0" max="24"
                 value="0">
             </td>
           </tr>
@@ -72,7 +72,7 @@
             <th scope="row">Finals Week Brownie 📚</th>
             <td>
               <label for="finals_week_brownie" class="visually-hidden">Finals Week Brownie quantity</label>
-              <input type="text" id="finals_week_brownie" name="items[finals_week_brownie]" min="0" max="24"
+              <input type="number" id="finals_week_brownie" name="items[finals_week_brownie]" min="0" max="24"
                 value="0">
             </td>
           </tr>
@@ -81,7 +81,7 @@
             <th scope="row">Victory Cinnamon Roll 🏆</th>
             <td>
               <label for="victory_cinnamon_roll" class="visually-hidden">Victory Cinnamon Roll quantity</label>
-              <input type="text" id="victory_cinnamon_roll" name="items[victory_cinnamon_roll]" min="0" max="24"
+              <input type="number" id="victory_cinnamon_roll" name="items[victory_cinnamon_roll]" min="0" max="24"
                 value="0">
             </td>
           </tr>
