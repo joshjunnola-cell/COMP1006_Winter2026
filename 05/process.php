@@ -1,5 +1,5 @@
 <?php
-
+//require database connection script
 require "includes/connect.php";  
 
 /*1*/
@@ -7,7 +7,7 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     die('Invalid request');
 }
 
-/*2*/
+/*2 sanitize the data */
 $firstName = trim(filter_input(INPUT_POST, 'first_name', FILTER_SANITIZE_SPECIAL_CHARS));
 $lastName  = trim(filter_input(INPUT_POST, 'last_name', FILTER_SANITIZE_SPECIAL_CHARS));
 $email     = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_EMAIL);
@@ -68,6 +68,30 @@ if (!empty($errors)) {
 
 /*4*/
 
+//Build our query using named placeholders
+
+$sql = "INSERT INTO orders (first_name, last_name, phone, address, email, comments) VALUES 
+(:first_name, :last_name, :phone, :address, :email, :comments)";
+
+//Prepare the query
+
+$stmt = $pdo->prepare($sql);
+
+//Map the named placeholders to the user/actual data
+
+$stmt->bindParam(':first_name', $firstName);
+$stmt->bindParam(':last_name', $lastName);
+$stmt->bindParam(':phone', $phone);
+$stmt->bindParam(':address', $address);
+$stmt->bindParam(':email', $email);
+$stmt->bindParam(':comments', $comments);
+
+//Execute the query
+
+$stmt->execute();
+
+//close the connection
+$pdo = null;
 
 ?>
 <? require "includes/header.php"; ?> 
