@@ -1,5 +1,9 @@
 <?php
+<<<<<<< HEAD
 //require database connection script
+=======
+//require database connection script 
+>>>>>>> 1a34152f2636dd2ad897ed74d8dd6a77e49b6821
 require "includes/connect.php";  
 
 /*1*/
@@ -7,7 +11,11 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     die('Invalid request');
 }
 
+<<<<<<< HEAD
 /*2 sanitize the data */
+=======
+/*2* sanitize data */
+>>>>>>> 1a34152f2636dd2ad897ed74d8dd6a77e49b6821
 $firstName = trim(filter_input(INPUT_POST, 'first_name', FILTER_SANITIZE_SPECIAL_CHARS));
 $lastName  = trim(filter_input(INPUT_POST, 'last_name', FILTER_SANITIZE_SPECIAL_CHARS));
 $email     = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_EMAIL);
@@ -68,6 +76,7 @@ if (!empty($errors)) {
 
 /*4*/
 
+<<<<<<< HEAD
 //Build our query using named placeholders
 
 $sql = "INSERT INTO orders (first_name, last_name, phone, address, email, comments) VALUES 
@@ -92,7 +101,30 @@ $stmt->execute();
 
 //close the connection
 $pdo = null;
+=======
+//build our query using named placeholders 
+>>>>>>> 1a34152f2636dd2ad897ed74d8dd6a77e49b6821
 
+$sql = "INSERT INTO orders (first_name, last_name, phone, address, email, comments) VALUES (:first_name, :last_name, :phone, :address, :email, :comments)"; 
+
+//prepare the query 
+
+$stmt = $pdo->prepare($sql); 
+
+//map the named placeholder to the user data/actual data 
+
+$stmt->bindParam(':first_name', $firstName);
+$stmt->bindParam(':last_name', $lastName); 
+$stmt->bindParam(':phone', $phone); 
+$stmt->bindParam(':email', $email); 
+$stmt->bindParam(':address', $address); 
+$stmt->bindParam(':comments', $comments); 
+
+//execute the query 
+$stmt->execute(); 
+
+//close the connection 
+$pdo = null; 
 ?>
 <? require "includes/header.php"; ?> 
 <div class="alert alert-success">
