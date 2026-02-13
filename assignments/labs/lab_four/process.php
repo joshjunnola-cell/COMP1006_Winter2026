@@ -1,5 +1,6 @@
 <?php
 require "includes/connect.php";
+require "subscribers.php";
 //  TODO: connect to the database 
 
 //   TODO: Grab form data (no validation or sanitization for this lab)
