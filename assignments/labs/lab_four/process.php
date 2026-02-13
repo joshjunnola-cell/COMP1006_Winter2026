@@ -1,8 +1,12 @@
 <?php
-require "includes/header.php";
+require "includes/connect.php";
 //  TODO: connect to the database 
 
 //   TODO: Grab form data (no validation or sanitization for this lab)
+$first_name = $_POST['first_name'];
+$last_name = $_POST['last_name'];
+$email = $_POST['email'];
+
 
 /*
   1. Write an INSERT statement with named placeholders
@@ -11,7 +15,25 @@ require "includes/header.php";
   4.
 
 */
+$sql = "
+    INSERT INTO subscribers (
+    first_name,
+    last_name,
+    email
+    ) VALUES (
+    :first_name,
+    :last_name,
+    :email
+    )
+";
 
+$stmt = $pdo->prepare($sql);
+
+$stmt->bindParam(':first_name', $first_name);
+$stmt->bindParam(':last_name', $last_name);
+$stmt->bindParam(':email', $email);
+
+$stmt->execute();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -25,8 +47,9 @@ require "includes/header.php";
 <body>
 
     <main class="container mt-4">
-        <h2>Thank You for Subscribing</h2>
+        <h2>Thank You for Subscribing, <?= htmlspecialchars($first_name) ?> <?= htmlspecialchars($last_name) ?></h2>
 
+        <p>You will be sent a confirmation email at <?= htmlspecialchars($email) ?></p>
         <!-- TODO: Display a confirmation message -->
         <!-- Example: "Thanks, Name! You have been added to our mailing list." -->
 

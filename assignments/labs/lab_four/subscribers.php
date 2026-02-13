@@ -11,6 +11,7 @@ require "includes/connect.php";
   5. Fetch all results into $subscribers
 */
 
+
 $subscribers = []; // placeholder
 ?>
 
