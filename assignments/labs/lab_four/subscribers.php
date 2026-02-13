@@ -38,11 +38,11 @@ $subscribers = $stmt->fetchAll(); // placeholder
         <!-- TODO: Loop through $subscribers and output each row -->
         <?php foreach ($subscribers as $subscriber): ?>
           <tr>
-            <td><?= htmlspecialchars($subscribers['id']); ?></td>
-            <td><?= htmlspecialchars($subscribers['first_name']); ?></td>
-            <td><?= htmlspecialchars($subscribers['last_name']); ?></td>    
-            <td><?= htmlspecialchars($subscribers['email']); ?></td>
-            <td><?= htmlspecialchars($subscribers['subscribed_at']); ?></td>
+            <td><?= htmlspecialchars($subscriber['id']); ?></td>
+            <td><?= htmlspecialchars($subscriber['first_name']); ?></td>
+            <td><?= htmlspecialchars($subscriber['last_name']); ?></td>    
+            <td><?= htmlspecialchars($subscriber['email']); ?></td>
+            <td><?= htmlspecialchars($subscriber['subscribed_at']); ?></td>
           </tr>
         <?php endforeach; ?>
       </tbody>
