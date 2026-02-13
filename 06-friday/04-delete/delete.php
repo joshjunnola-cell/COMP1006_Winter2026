@@ -8,16 +8,27 @@
  * - Redirects back to orders.php
  */
 //connect to db
+require "includes/connect.php";
 
 // make sure we received an ID
+if (!isset($_GET['id'])) {
+  die("No order ID provided.");
+}
+
+$customerId = $_GET['id'];
 
 // create the query 
+$sql = "DELETE from orders1 WHERE customer_id = :customer_id";
 
 //prepare 
+$stmt = $pdo->prepare($sql);
 
 //bind 
+$stmt->bindParam(':customer_id', $customerid);
 
 //execute
+$stmt->execute();
 
 // Redirect back to admin list
-
+header("Location: orders.php");
+exit;
