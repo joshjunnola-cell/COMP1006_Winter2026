@@ -1,7 +1,7 @@
 <?php
 require "includes/header.php"; ?>
 
-<h1 class="mb-4">Your Tasks</h1>
+<h1 class="mb-4">Your Tasks</h1><!-- lists current tasks -->
 
 <table class="table table-striped table-bordered align-middle"><!-- setups up how the table will look -->
     <thead class="table-dark">
