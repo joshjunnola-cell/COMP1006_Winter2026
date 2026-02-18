@@ -1,5 +1,7 @@
 <?php
-require "includes/header.php"; ?>
+require "includes/connect.php";
+require "includes/header.php"; 
+?>
 
 <h1 class="mb-4">Delete Task</h1><!-- Delete task main heading -->
 

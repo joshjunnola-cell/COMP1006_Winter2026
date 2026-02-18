@@ -1,5 +1,7 @@
 <?php
-require "includes/header.php"; ?>
+require "includes/connect.php";
+require "includes/header.php";
+ ?>
 
 <h1 class="mb-4">Your Tasks</h1><!-- lists current tasks -->
 
