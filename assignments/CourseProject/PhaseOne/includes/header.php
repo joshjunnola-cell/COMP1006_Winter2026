@@ -5,12 +5,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Phase One - Time Tracker</title>
+    <link href="assignments/styles/styles.css" rel="stylesheet" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
-    <link href="styles/main.css" rel="stylesheet">
 </head>
 <body>
-    <nav>
-        <a href="index.php">Time Tracker</a>
-        <a href="add.php">Add a Task</a>
+    <nav class="navbar bg-dark border-bottom border-body mb-4" data-bs-theme="dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="index.php">Time Tracker</a>
+            <a class="btn btn-outline-light" href="add.php">Add a Task</a>
+        </div>
     </nav>
 </body>
+<div class="container-fluid">
