@@ -10,7 +10,7 @@ require "includes/header.php";
     <small><strong>This cannot be undone.</strong></small>
 </p>
 
-<a href="tasks.php?delete=<?php echo $_GET['id']; ?>" class="btn btn-danger">YES</a><!-- Yes to confirm or cancel button -->
-<a href="index.php" class="btn btn-secondary">CANCEL</a>
+<a href="add.php?delete=<?php echo $_GET['id'] ?? ''; ?>" class="btn btn-danger">YES</a><!-- Yes to confirm or cancel button -->
+<a href="tasks.php" class="btn btn-secondary">CANCEL</a>
 
 <?php require "includes/footer.php"; ?>

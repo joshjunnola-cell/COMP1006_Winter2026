@@ -12,7 +12,7 @@
 <body><!-- Body info including nav with bootstrap for styling and spacing -->
     <nav class="navbar bg-dark border-bottom border-body mb-4" data-bs-theme="dark">
         <div class="container-fluid">
-            <a class="navbar-brand" href="index.php">Time Tracker</a>
+            <a class="navbar-brand" href="tasks.php">Time Tracker</a>
             <a class="btn btn-outline-light" href="add.php">Add a Task</a>
         </div>
     </nav>
