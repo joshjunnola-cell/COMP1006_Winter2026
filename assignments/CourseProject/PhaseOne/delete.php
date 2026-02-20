@@ -1,6 +1,30 @@
 <?php
 require "includes/connect.php";
 require "includes/header.php"; 
+
+// make sure we received an ID - repurposed code from week 6 lesson 4
+if (!isset($_GET['id'])|| empty($_GET['id'])) {
+  header("Location: tasks.php");
+  exit;
+}
+
+$id = $_GET['id'];
+
+// if user confirms delete task
+if ($_SERVER["REQUEST_METHOD"] === "POST"){ 
+
+    $sql = "DELETE from tasks WHERE id = :id";
+    //prepare 
+    $stmt = $pdo->prepare($sql);
+    //bind 
+    $stmt->bindParam(':id', $id);
+    //execute
+    $stmt->execute();
+
+    // redirect after update (prevents resubmission on refresh)
+    header("Location: tasks.php");
+    exit;
+}
 ?>
 
 <h1 class="mb-4">Delete Task</h1><!-- Delete task main heading -->
@@ -10,7 +34,9 @@ require "includes/header.php";
     <small><strong>This cannot be undone.</strong></small>
 </p>
 
-<a href="add.php?delete=<?php echo $_GET['id'] ?? ''; ?>" class="btn btn-danger">YES</a><!-- Yes to confirm or cancel button -->
+<form method="post">
+<button type="submit" class="btn btn-danger">YES</button><!-- Yes to confirm or cancel button -->
 <a href="tasks.php" class="btn btn-secondary">CANCEL</a>
+</form>
 
 <?php require "includes/footer.php"; ?>
