@@ -30,4 +30,4 @@ require "includes/header.php";
         </tr>
     </tbody>
 </table>
-<?php "includes/footer.php"; ?>
+<?php require "includes/footer.php"; ?>

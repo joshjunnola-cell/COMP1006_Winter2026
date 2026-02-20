@@ -1,3 +1,4 @@
+<!-- Page allows users to add new tasks, also throws up warning messages if something has gone wrong. -->
 <?php
 require "includes/connect.php";
 require "includes/header.php"; 
@@ -20,8 +21,7 @@ if($_SERVER["REQUEST_METHOD"] === "POST") {
     $time_spent = trim($_POST["time_spent"]);
     $action_plan = trim($_POST["action_plan"]);
 
-    // Product quantities (force to integer, prevent blanks) - code updated and repurposed from week 6 lesson 3
-    $time_spent = (int)($_POST['time_spent'] ?? 0);
+    // code updated and repurposed from week 6 lesson 3
 
     // Simple validation (beginner-friendly) 
     if($task_name === ""){
@@ -45,7 +45,7 @@ if($_SERVER["REQUEST_METHOD"] === "POST") {
         $errors[] ="Action plan required, plan ahead!!";
     }
 
-    if(empty($errors)){
+    if(empty($errors)){//if no errors insert data into sql db
 
         $sql = "INSERT INTO tasks (task_name, priority, due_date, time_spent, action_plan)
             VALUES (:task_name, :priority, :due_date, :time_spent, :action_plan)";
@@ -53,11 +53,11 @@ if($_SERVER["REQUEST_METHOD"] === "POST") {
         $stmt = $pdo->prepare($sql);
 
         $stmt->execute([
-            "task_name" => $task_name,
-            "priority" => $priority,
-            "due_date" => $due_date,
-            "time_spent" => $time_spent,
-            "action_plan" => $action_plan
+            ":task_name" => $task_name,
+            ":priority" => $priority,
+            ":due_date" => $due_date,
+            ":time_spent" => $time_spent,
+            ":action_plan" => $action_plan
         ]);
 
         // Redirect back to the task list (prevents resubmission on refresh)
@@ -71,10 +71,15 @@ if($_SERVER["REQUEST_METHOD"] === "POST") {
 
 <h1 class="mb-4">Add New Task</h1><!-- add new task page heading -->
 
-<?php if(!empty($errors)): ?>
-    <div class="">
-        
+<?php if(!empty($errors)): ?><!-- loops through error messages and shows them to user if any -->
+    <div class="alert alert-danger">
+        <ul class="mb-0">
+            <?php foreach($errors as $error): ?>
+                <li><?= htmlspecialchars($error) ?></li>
+            <?php endforeach; ?>
+        </ul>
     </div>
+<?php endif; ?>
 
 <form action="add.php" method="post" class="card p-4 shadow-sm"><!-- Sends to address at action -->
 

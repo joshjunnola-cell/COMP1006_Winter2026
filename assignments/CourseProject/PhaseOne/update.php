@@ -63,4 +63,4 @@ require "includes/header.php";
 
 </form>
 
-<?php "includes/footer.php"; ?>
+<?php require "includes/footer.php"; ?>
