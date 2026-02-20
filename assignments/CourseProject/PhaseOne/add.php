@@ -24,27 +24,41 @@ if($_SERVER["REQUEST_METHOD"] === "POST") {
     $time_spent = (int)($_POST['time_spent'] ?? 0);
 
     // Simple validation (beginner-friendly) 
-    if ($taskName === '' || $priority === '' || $dueDate === '' || $timeSpent === '' ||$actionPlan === '') {
-        $error = "All Fields must be Filled!";
-    } else {
+    if($task_name === ""){
+        $errors[] = "Task name is required.";
+    }
 
-        $sql = "UPDATE phaseone
-            SET task_name = :task_name,
-                priority = :priority,
-                due_date = :due_date,
-                time_spent = :time_spent,
-                action_plan = :action_plan
-            WHERE customer_id = :customer_id";
+    $valid_priorities = ["high","medium","low"];
+    if(!in_array($priority, $valid_priorities)) {
+        $errors[] = "Priority must be set!";
+    }
 
+    if($due_date === "" || !strtotime($due_date)){
+        $errors[] = "Must be a valid due date.";
+    }
+
+    if(!is_numeric($time_spent) || $time_spent < 0){
+        $errors[] = "Time spent must be a positive number (decimals are allowed).";
+    }
+
+    if($action_plan === ""){
+        $errors[] ="Action plan required, plan ahead!!";
+    }
+
+    if(empty($errors)){
+
+        $sql = "INSERT INTO tasks (task_name, priority, due_date, time_spent, action_plan)
+            VALUES (:task_name, :priority, :due_date, :time_spent, :action_plan)";
+       
         $stmt = $pdo->prepare($sql);
 
-        $stmt->bindParam(':task_name', $taskName);
-        $stmt->bindParam(':priority', $priority);
-        $stmt->bindParam(':due_date', $dueDate);
-        $stmt->bindParam(':time_spent', $timeSpent);
-        $stmt->bindParam(':action_plan', $action_plan);
-
-        $stmt->execute();
+        $stmt->execute([
+            "task_name" => $task_name,
+            "priority" => $priority,
+            "due_date" => $due_date,
+            "time_spent" => $time_spent,
+            "action_plan" => $action_plan
+        ]);
 
         // Redirect back to the task list (prevents resubmission on refresh)
         header("Location: tasks.php");
@@ -56,6 +70,11 @@ if($_SERVER["REQUEST_METHOD"] === "POST") {
 ?>
 
 <h1 class="mb-4">Add New Task</h1><!-- add new task page heading -->
+
+<?php if(!empty($errors)): ?>
+    <div class="">
+        
+    </div>
 
 <form action="add.php" method="post" class="card p-4 shadow-sm"><!-- Sends to address at action -->
 
@@ -96,4 +115,4 @@ if($_SERVER["REQUEST_METHOD"] === "POST") {
 
     <button type="submit" class="btn btn-success">Add Task</button><!-- submit completed task -->
 </form>
-<?php "includes/footer.php"; ?>
+<?php require "includes/footer.php"; ?>

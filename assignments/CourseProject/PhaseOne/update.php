@@ -3,6 +3,21 @@ require "includes/connect.php";
 require "includes/header.php"; 
 ?>
 
+        <!-- $sql = "INSERT INTO tasks
+            SET task_name = :task_name,
+                priority = :priority,
+                due_date = :due_date,
+                time_spent = :time_spent,
+                action_plan = :action_plan
+            WHERE customer_id = :customer_id";
+        
+        $stmt->bindParam(':task_name', $taskName);
+        $stmt->bindParam(':priority', $priority);
+        $stmt->bindParam(':due_date', $dueDate);
+        $stmt->bindParam(':time_spent', $timeSpent);
+        $stmt->bindParam(':action_plan', $action_plan);
+            -->
+
 <h1>Edit Task</h1><!-- edit task page heading -->
 
 <form action="update.php" method="post" class=""><!-- Sends to address at action -->
