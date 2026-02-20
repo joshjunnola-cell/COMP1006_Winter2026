@@ -1,7 +1,14 @@
 <?php
 require "includes/connect.php";
 require "includes/header.php";
- ?>
+ 
+// to fetch all tasks from database ordered by due date
+// orders by due date so the user knows whats coming up soonest.
+$sql = "SELECT * FROM tasks ORDER BY due_date ASC";
+$stmt = $pdo->prepare($sql);
+$stmt->execute();
+$tasks = $stmt->fetchAll();
+?>
 
 <h1 class="mb-4">Your Tasks</h1><!-- lists current tasks -->
 
@@ -17,17 +24,27 @@ require "includes/header.php";
         </tr>
     </thead>
     <tbody>
-        <tr><!-- this shows a example of output to user -->
-            <td>Task Example</td>
-            <td>High</td>
-            <td>2026-02-20</td>
-            <td>6</td>
-            <td>I have to focus on the task at hand(EXAMPLE)</td>
-            <td>
-                <a href='update.php' class="btn btn-sm btn-primary">Edit</a><!-- Update/edit and delete buttons -->
-                <a href='delete.php' class="btn btn-sm btn-danger">Delete</a>
-            </td>
-        </tr>
+        <?php if(empty($tasks)): ?><!-- placeholder to let user know to add tasks -->
+            <tr>
+                <td colspan="6" class="text-center text-muted">
+                    No Tasks found. Add one to get started!
+                </td>
+            </tr>
+        <?php else: ?>
+            <?php foreach ($tasks as $task): ?>
+                <tr><!-- takes created tasks from db and displays them in table -->
+                    <td><?= htmlspecialchars($task["task_name"]) ?></td>
+                    <td><?= htmlspecialchars(ucfirst($task["priority"])) ?></td>
+                    <td><?= htmlspecialchars($task["due_date"]) ?></td>
+                    <td><?= htmlspecialchars($task["time_spent"]) ?></td>
+                    <td><?= htmlspecialchars($task["action_plan"]) ?></td>
+                    <td>
+                        <a href='update.php?id=<?= $task["id"] ?>' class="btn btn-sm btn-primary">Edit</a><!-- Update/edit and delete buttons -->
+                        <a href='delete.php?id=<?= $task["id"] ?>' class="btn btn-sm btn-danger">Delete</a>
+                    </td>
+                </tr>
+            <?php endforeach; ?>
+        <?php endif; ?>
     </tbody>
 </table>
 <?php require "includes/footer.php"; ?>
