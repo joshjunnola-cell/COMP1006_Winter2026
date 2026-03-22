@@ -1,0 +1,5 @@
+<?php
+
+$uploadFolder = "uploads/";
+
+if ()
