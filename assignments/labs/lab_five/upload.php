@@ -55,7 +55,7 @@ $extension = pathinfo($file['name'], PATHINFO_EXTENSION);
 $safeFileName = uniqid('img_', true) . '.' . strtolower($extension);
 
 //Destination folder
-$destination = __DIR__ . "uploads/" . $safeFileName;
+$destination = __DIR__ . "/uploads/" . $safeFileName;
 $imgPath = 'uploads/' . $safeFileName;
 
 if (!move_uploaded_file($file['tmp_name'], $destination)) {
