@@ -1,9 +1,4 @@
 <?php
-//include auth file to restrict users access to the page 
-require "includes/auth.php";
-require "includes/header_admin.php";
-require "includes/connect.php";
-
 /**
  * orders.php
  * ------------------------------------------------------------
@@ -11,13 +6,11 @@ require "includes/connect.php";
  * Clicking Update sends the order's customer_id to update.php via the URL.
  */
 
+require "includes/header.php";
+require "includes/connect.php";
 
 // Get all orders (newest first)
-<<<<<<< HEAD
-$sql = "SELECT * FROM orders ORDER BY created_at DESC";
-=======
 $sql = "SELECT * FROM orders1 ORDER BY created_at DESC";
->>>>>>> fc1327cb65472caffc1789981a5c1ad0205415b1
 $stmt = $pdo->prepare($sql);
 $stmt->execute();
 $orders = $stmt->fetchAll();
@@ -55,11 +48,11 @@ $orders = $stmt->fetchAll();
           <?php foreach ($orders as $order): ?>
 
             <?php
-            // Total items (sum of all product quantity columns)
-            $total =
-              (int)$order['chaos_croissant'] +
-              (int)$order['existential_eclair'] +
-              (int)$order['procrastination_cookie'];
+              // Total items (sum of all product quantity columns)
+              $total =
+                (int)$order['chaos_croissant'] +
+                (int)$order['existential_eclair'] +
+                (int)$order['procrastination_cookie'];
             ?>
 
             <tr>
@@ -85,14 +78,9 @@ $orders = $stmt->fetchAll();
                 <!-- Sends the ID to update.php -->
                 <a
                   class="btn btn-sm btn-warning"
-                  href="update.php?id=<?= urlencode($order['customer_id']); ?>">
+                  href="update.php?id=<?= urlencode($order['customer_id']); ?>"
+                >
                   Update
-                </a>
-                <a
-                  class="btn btn-sm btn-danger mt-2"
-                  href="delete.php?id=<?= urlencode($order['customer_id']); ?>"
-                  onclick="return confirm('Are you sure you want to delete this order?');">
-                  Delete
                 </a>
               </td>
             </tr>
@@ -103,19 +91,10 @@ $orders = $stmt->fetchAll();
     </div>
 
   <?php endif; ?>
-  <a class="btn btn-secondary" href="index.php">Back to Order Form</a>
+
+  <p class="mt-3">
+    <a class="btn btn-secondary" href="index.php">Back to Order Form</a>
+  </p>
 </main>
 
 <?php require "includes/footer.php"; ?>
-<!-- make sure the cached version of the page isn't shown (in case user is logged out)-->
-<script>
-  window.addEventListener("pageshow", function(event) {
-    if (event.persisted) {
-      window.location.reload();
-    }
-  });
-<<<<<<< HEAD
-</script>ß
-=======
-</script>
->>>>>>> fc1327cb65472caffc1789981a5c1ad0205415b1

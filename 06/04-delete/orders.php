@@ -1,8 +1,4 @@
 <?php
-//include auth file to restrict users access to the page 
-require "includes/auth.php";
-require "includes/header_admin.php";
-require "includes/connect.php";
 
 /**
  * orders.php
@@ -11,13 +7,11 @@ require "includes/connect.php";
  * Clicking Update sends the order's customer_id to update.php via the URL.
  */
 
+require "includes/header.php";
+require "includes/connect.php";
 
 // Get all orders (newest first)
-<<<<<<< HEAD
-$sql = "SELECT * FROM orders ORDER BY created_at DESC";
-=======
 $sql = "SELECT * FROM orders1 ORDER BY created_at DESC";
->>>>>>> fc1327cb65472caffc1789981a5c1ad0205415b1
 $stmt = $pdo->prepare($sql);
 $stmt->execute();
 $orders = $stmt->fetchAll();
@@ -107,15 +101,3 @@ $orders = $stmt->fetchAll();
 </main>
 
 <?php require "includes/footer.php"; ?>
-<!-- make sure the cached version of the page isn't shown (in case user is logged out)-->
-<script>
-  window.addEventListener("pageshow", function(event) {
-    if (event.persisted) {
-      window.location.reload();
-    }
-  });
-<<<<<<< HEAD
-</script>ß
-=======
-</script>
->>>>>>> fc1327cb65472caffc1789981a5c1ad0205415b1

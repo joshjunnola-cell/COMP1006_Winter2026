@@ -1,5 +1,4 @@
 <?php
-require "includes/auth.php";
 /**
  * update.php
  * ------------------------------------------------------------
@@ -44,11 +43,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $error = "First name, last name, and email are required.";
   } else {
 
-<<<<<<< HEAD
-    $sql = "UPDATE orders
-=======
     $sql = "UPDATE orders1
->>>>>>> fc1327cb65472caffc1789981a5c1ad0205415b1
             SET first_name = :first_name,
                 last_name = :last_name,
                 phone = :phone,
@@ -85,11 +80,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 /* -------------------------------------------
    STEP 3: Load existing order data (to echo in the form)
 -------------------------------------------- */
-<<<<<<< HEAD
-$sql = "SELECT * FROM orders WHERE customer_id = :customer_id";
-=======
 $sql = "SELECT * FROM orders1 WHERE customer_id = :customer_id";
->>>>>>> fc1327cb65472caffc1789981a5c1ad0205415b1
 $stmt = $pdo->prepare($sql);
 $stmt->bindParam(':customer_id', $customerId);
 $stmt->execute();

@@ -41,6 +41,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     //Add Code Here 
+<<<<<<< HEAD
     //Check whether a file was uploaded
 
     if(isset($_FILES['product_image']) && $_FILES['product_image']['error'] !== UPLOAD_ERR_NO_FILE) {
@@ -76,6 +77,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             }
         }
     }
+=======
+>>>>>>> fc1327cb65472caffc1789981a5c1ad0205415b1
 
     // If there are no errors, insert the product into the database
     if (empty($errors)) {
@@ -157,4 +160,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     </form>
 </main>
 
+<<<<<<< HEAD
 <?php require "includes/footer.php"; ?>
+=======
+<?php require "footer.php"; ?>
+>>>>>>> fc1327cb65472caffc1789981a5c1ad0205415b1

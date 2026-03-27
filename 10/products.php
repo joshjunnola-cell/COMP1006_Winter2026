@@ -4,16 +4,21 @@ require "includes/connect.php";
 require "includes/header.php";
 
 // Get all products, newest first
+<<<<<<< HEAD
 $sql = "SELECT *
         FROM products 
         ORDER BY created_at DESC";
 $stmt = $pdo->prepare($sql);
 $stmt->execute();
 $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
+=======
+
+>>>>>>> fc1327cb65472caffc1789981a5c1ad0205415b1
 ?>
 
 <main class="container mt-4">
     <h1 class="mb-4">Our Products</h1>
+<<<<<<< HEAD
     <?php if (empty($products)): ?>
         <p>No products available yet.</p>
     <?php else: ?>
@@ -47,4 +52,9 @@ $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
         </div>
     <?php endif; ?>
 </main>
+=======
+
+</main>
+
+>>>>>>> fc1327cb65472caffc1789981a5c1ad0205415b1
 <?php require "includes/footer.php"; ?>

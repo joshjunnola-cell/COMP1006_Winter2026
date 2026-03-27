@@ -112,11 +112,7 @@ if (!empty($errors)) {
 // NOTE: We insert ALL item columns every time.
 // If an item was not ordered, we store 0 for that column.
 $sql = "
-<<<<<<< HEAD
-    INSERT INTO orders (
-=======
     INSERT INTO orders1 (
->>>>>>> fc1327cb65472caffc1789981a5c1ad0205415b1
         first_name,
         last_name,
         phone,
