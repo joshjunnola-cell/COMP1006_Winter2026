@@ -5,7 +5,7 @@ require "includes/header.php";
 // handles get request
 // if there is no id, redirects user
 if (!isset($_GET["id"]) || empty($_GET["id"])) {
-    header("Location: tasks.php");
+    header("Location: index.php");
     exit;
 }
 
@@ -18,7 +18,7 @@ $stmt->execute(["id" => $id]);
 $task = $stmt->fetch(PDO::FETCH_ASSOC);
 
 if (!$task) {
-    header("Location: tasks.php");
+    header("Location: index.php");
     exit;
 }
 
@@ -85,7 +85,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         $stmt->execute();
 
         // redirect after update (prevents resubmission on refresh)
-        header("Location: tasks.php");
+        header("Location: index.php");
         exit;
     }
 }

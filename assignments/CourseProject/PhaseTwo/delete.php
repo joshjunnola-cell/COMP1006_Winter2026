@@ -4,7 +4,7 @@ require "includes/header.php";
 
 // make sure we received an ID - repurposed code from week 6 lesson 4
 if (!isset($_GET['id'])|| empty($_GET['id'])) {
-  header("Location: tasks.php");
+  header("Location: index.php");
   exit;
 }
 
@@ -22,7 +22,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST"){
     $stmt->execute();
 
     // redirect after update (prevents resubmission on refresh)
-    header("Location: tasks.php");
+    header("Location: index.php");
     exit;
 }
 ?>
@@ -36,7 +36,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST"){
 
 <form method="post">
 <button type="submit" class="btn btn-danger">YES</button><!-- Yes to confirm or cancel button -->
-<a href="tasks.php" class="btn btn-secondary">CANCEL</a>
+<a href="index.php" class="btn btn-secondary">CANCEL</a>
 </form>
 
 <?php require "includes/footer.php"; ?>

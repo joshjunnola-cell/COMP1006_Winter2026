@@ -61,7 +61,7 @@ if($_SERVER["REQUEST_METHOD"] === "POST") {
         ]);
 
         // Redirect back to the task list (prevents resubmission on refresh)
-        header("Location: tasks.php");
+        header("Location: index.php");
         exit;
     }
 
