@@ -19,7 +19,7 @@ $sql = "SELECT * FROM tasks
 $stmt = $pdo->prepare($sql);
 
 $stmt->execute([":id" => $id,
-                "user_id" => $_SESSION["user_id"]]);
+                ":user_id" => $_SESSION["user_id"]]);
 
 $task = $stmt->fetch(PDO::FETCH_ASSOC);
 
@@ -77,18 +77,20 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                     due_date = :due_date,
                     time_spent = :time_spent,
                     action_plan = :action_plan
-                WHERE id = :id";
+                WHERE id = :id
+                AND user_id = :user_id";
 
         $stmt = $pdo->prepare($sql);
 
-        $stmt->bindParam(':task_name', $task_name);
-        $stmt->bindParam(':priority', $priority);
-        $stmt->bindParam(':due_date', $due_date);
-        $stmt->bindParam(':time_spent', $time_spent);
-        $stmt->bindParam(':action_plan', $action_plan);
-        $stmt->bindParam(':id', $id);
-
-        $stmt->execute();
+        $stmt->execute([
+        ':task_name' => $task_name,
+        ':priority' => $priority,
+        ':due_date' => $due_date,
+        ':time_spent' => $time_spent,
+        ':action_plan' => $action_plan,
+        ':id' => $id,
+        ':user_id' => $_SESSION['user_id']
+        ]);
 
         // redirect after update (prevents resubmission on refresh)
         header("Location: index.php");
