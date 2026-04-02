@@ -13,13 +13,15 @@ $id = $_GET['id'];
 // if user confirms delete task
 if ($_SERVER["REQUEST_METHOD"] === "POST"){ 
 
-    $sql = "DELETE from tasks WHERE id = :id";
+    $sql = "DELETE from tasks 
+            WHERE id = :id
+            AND user_id = :user_id";
     //prepare 
     $stmt = $pdo->prepare($sql);
-    //bind 
-    $stmt->bindParam(':id', $id);
-    //execute
-    $stmt->execute();
+     
+    //bind and execute
+    $stmt->execute([':id' => $id,
+                    ':user_id' => $_SESSION['user_id']]);
 
     // redirect after update (prevents resubmission on refresh)
     header("Location: index.php");

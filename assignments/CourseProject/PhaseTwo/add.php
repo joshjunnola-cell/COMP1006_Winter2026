@@ -47,8 +47,8 @@ if($_SERVER["REQUEST_METHOD"] === "POST") {
 
     if(empty($errors)){//if no errors insert data into sql db
 
-        $sql = "INSERT INTO tasks (task_name, priority, due_date, time_spent, action_plan)
-            VALUES (:task_name, :priority, :due_date, :time_spent, :action_plan)";
+        $sql = "INSERT INTO tasks (task_name, priority, due_date, time_spent, action_plan, user_id)
+            VALUES (:task_name, :priority, :due_date, :time_spent, :action_plan, :user_id)";
        
         $stmt = $pdo->prepare($sql);
 
@@ -57,7 +57,8 @@ if($_SERVER["REQUEST_METHOD"] === "POST") {
             ":priority" => $priority,
             ":due_date" => $due_date,
             ":time_spent" => $time_spent,
-            ":action_plan" => $action_plan
+            ":action_plan" => $action_plan,
+            ":user_id" => $_SESSION['user_id']
         ]);
 
         // Redirect back to the task list (prevents resubmission on refresh)

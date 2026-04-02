@@ -1,12 +1,13 @@
 <?php
 require "includes/connect.php";
 require "includes/header.php";
+require "includes/auth.php";
  
 // to fetch all tasks from database ordered by due date
 // orders by due date so the user knows whats coming up soonest.
-$sql = "SELECT * FROM tasks ORDER BY due_date ASC";
+$sql = "SELECT * FROM tasks WHERE user_id = :user_id ORDER BY due_date ASC";
 $stmt = $pdo->prepare($sql);
-$stmt->execute();
+$stmt->execute([':user_id' => $_SESSION['user_id']]);
 $tasks = $stmt->fetchAll();
 ?>
 

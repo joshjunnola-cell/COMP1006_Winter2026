@@ -12,9 +12,15 @@ if (!isset($_GET["id"]) || empty($_GET["id"])) {
 $id = $_GET["id"];
 
 // used to fetch existing task
-$sql = "SELECT * FROM tasks WHERE id = :id";
+$sql = "SELECT * FROM tasks 
+        WHERE id = :id 
+        AND user_id = :user_id";
+
 $stmt = $pdo->prepare($sql);
-$stmt->execute(["id" => $id]);
+
+$stmt->execute([":id" => $id,
+                "user_id" => $_SESSION["user_id"]]);
+
 $task = $stmt->fetch(PDO::FETCH_ASSOC);
 
 if (!$task) {
