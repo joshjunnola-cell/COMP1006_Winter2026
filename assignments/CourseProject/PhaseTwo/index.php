@@ -2,7 +2,7 @@
 require "includes/connect.php";
 require "includes/header.php";
 require "includes/auth.php";
- 
+
 // to fetch all tasks from database ordered by due date
 // orders by due date so the user knows whats coming up soonest.
 $sql = "SELECT * FROM tasks WHERE user_id = :user_id ORDER BY due_date ASC";
@@ -17,6 +17,7 @@ $tasks = $stmt->fetchAll();
     <thead class="table-dark">
         <tr>
             <th>Task Name:</th>
+            <th>Image</th>
             <th>Priority:</th>
             <th>Due Date:</th>
             <th>Time Spend (hrs):</th>
@@ -25,7 +26,7 @@ $tasks = $stmt->fetchAll();
         </tr>
     </thead>
     <tbody>
-        <?php if(empty($tasks)): ?><!-- placeholder to let user know to add tasks -->
+        <?php if (empty($tasks)): ?><!-- placeholder to let user know to add tasks -->
             <tr>
                 <td colspan="6" class="text-center text-muted">
                     No Tasks found. Add one to get started!
@@ -33,8 +34,15 @@ $tasks = $stmt->fetchAll();
             </tr>
         <?php else: ?>
             <?php foreach ($tasks as $task): ?>
+
                 <tr><!-- takes created tasks from db and displays them in table -->
                     <td><?= htmlspecialchars($task["task_name"]) ?></td>
+                    <td>
+                        <?php if (!empty($task['image'])): ?>
+                            <img src="<?= htmlspecialchars($task['image']) ?>"
+                                alt="Task image" class="img-thumbnail mb-2" style="max-width: 150px; height: auto;">
+                        <?php endif; ?>
+                    </td>
                     <td><?= htmlspecialchars(ucfirst($task["priority"])) ?></td>
                     <td><?= htmlspecialchars($task["due_date"]) ?></td>
                     <td><?= htmlspecialchars($task["time_spent"]) ?></td>

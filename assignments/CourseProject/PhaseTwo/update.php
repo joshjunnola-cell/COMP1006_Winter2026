@@ -1,5 +1,6 @@
 <?php
 require "includes/connect.php";
+require "includes/auth.php";
 require "includes/header.php";
 
 // handles get request
