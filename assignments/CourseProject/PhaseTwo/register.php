@@ -1,5 +1,5 @@
-<?php 
-
+<?php
+session_start();
 // ======= Re-used code from lesson 10 =========
 
 // Include the database connection so we can interact with the users table
@@ -13,6 +13,12 @@ $errors = [];
 
 // Variable to store a success message if the account is created
 $success = "";
+
+//Registration variables
+$username = "";
+$email = "";
+$password = "";
+$confirmPassword = "";
 
 // Check if the form was submitted using POST
 // This ensures the registration logic only runs when the form is submitted
@@ -124,3 +130,58 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 }
 ?>
+
+<main class="container mt-4">
+
+    <h1 class="mb-4">Register</h1>
+
+    <?php if (!empty($errors)): ?>
+        <div class="alert alert-danger">
+            <ul class="mb-0">
+                <?php foreach ($errors as $error): ?>
+                    <li><?= htmlspecialchars($error) ?></li>
+                <?php endforeach; ?>
+            </ul>
+        </div>
+    <?php endif; ?>
+
+    <!-- Display success message if account creation succeeded -->
+    <?php if ($success !== ""): ?>
+        <div class="alert alert-success">
+            <?= htmlspecialchars($success); ?>
+            <br>
+            <!-- Provide a link to the login page -->
+            <a href="login.php" class="btn btn-sm btn-success mt-2">Go to Login</a>
+        </div>
+    <?php endif; ?>
+
+    <form action="register.php" method="post" class="card p-4 shadow-sm">
+
+        <div class="mb-3">
+            <label class="form-label">Username</label>
+            <input type="text" name="username" class="form-control"
+                value="<?= htmlspecialchars($username) ?>" required>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Email</label>
+            <input type="email" name="email" class="form-control"
+                value="<?= htmlspecialchars($email) ?>" required>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Password</label>
+            <input type="password" name="password" class="form-control" required>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Confirm Password</label>
+            <input type="password" name="confirm_password" class="form-control" required>
+        </div>
+
+        <button type="submit" class="btn btn-success">Create Account</button>
+    
+    </form>
+</main>
+
+<?php require "includes/footer.php"; ?>
