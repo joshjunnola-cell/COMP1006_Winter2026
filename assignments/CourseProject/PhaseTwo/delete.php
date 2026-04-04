@@ -1,5 +1,6 @@
 <?php
 require "includes/connect.php";
+require "includes/auth.php";
 require "includes/header.php"; 
 
 // make sure we received an ID - repurposed code from week 6 lesson 4
