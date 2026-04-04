@@ -6,7 +6,7 @@ session_start(); //Starts the session
 require "includes/connect.php";
 require "includes/header.php";
 
-$error = [];
+$error = "";
 $usernameOrEmail = "";
 $password = "";
 
@@ -44,21 +44,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 <h1 class="mb-4">Login</h1>
 
-<?php if (!empty($errors)): ?>
+<?php if ($error !== ""): ?>
     <div class="alert alert-danger">
-        <ul class="mb-0">
-            <?php foreach ($errors as $error): ?>
-                <li><?= htmlspecialchars($error) ?></li>
-            <?php endforeach; ?>
-        </ul>
+        <?= htmlspecialchars($error); ?>
     </div>
 <?php endif; ?>
 
 <form action="login.php" method="post" class="card p-4 shadow-sm">
 
     <div class="mb-3">
-        <label class="form-label">Email</label>
-        <input type="email" name="email" class="form-control" value="<?=  htmlspecialchars($usernameOrEmail) ?>" required>
+        <label class="form-label">Username or Email</label>
+        <input type="text" name="username_or_email" class="form-control" value="<?=  htmlspecialchars($usernameOrEmail) ?>" required>
     </div>
 
     <div class="mb-3">
@@ -67,7 +63,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     </div>
 
     <button type="submit" class="btn btn-primary">Login</button>
-    
+    <a href="register.php" class="btn btn-secondary">Sign Up</a>
+
 </form>
 
     <?php require "includes/footer.php"; ?>
