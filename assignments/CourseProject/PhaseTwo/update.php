@@ -1,7 +1,7 @@
 <?php
 require "includes/connect.php";
+require "includes/header.php"; 
 require "includes/auth.php";
-require "includes/header.php";
 
 // handles get request
 // if there is no id, redirects user
@@ -70,6 +70,55 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         $errors[] = "Action plan required, plan ahead!!";
     }
 
+    //To handle image updates
+    $newImagePath = $task['image'];
+    
+    // if user checked to remove image
+    if (!empty($_POST['remove_image'])) {
+
+        if(!empty($task['image']) && file_exists($task['image'])) {
+            unlink($task['image']); //deletes old file
+        }
+
+        $newImagePath = null;
+    }
+
+    // if new image uploaded
+    if (!empty($_FILES['image']['name'])) {
+
+        $file = $_FILES['image'];
+
+        // validate upload
+        $allowedTypes = ["image/jpeg", "image/png", "image/webp"];
+        $mimeType = mime_content_type($file['tmp_name']);
+
+        if (!in_array($mimeType, $allowedTypes)) {
+            $errors[] = "Invalid file type. Please upload a JPEG, PNG, or WebP image.";
+        }
+
+        if($file['size'] > 2 * 1024 * 1024) {
+            $errors[] = "File too large. Max 2MB.";
+        }
+        
+        if(empty($errors)) {
+
+            //delete old image
+            if (!empty($task['image']) && file_exists($task['image'])) {
+                unlink($task['image']);
+            }
+
+            //save the new file
+            $extension = pathinfo($file['name'], PATHINFO_EXTENSION);
+            $safeFileName = uniqid('img', true) . '.' . strtolower($extension);
+
+            $destination = "uploads/" . $safeFileName;
+
+            move_uploaded_file($file['tmp_name'], $destination);
+
+            $newImagePath = $destination;
+        }
+    }
+
     if (empty($errors)) { //if no errors update the task
 
         $sql = "UPDATE tasks
@@ -77,7 +126,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                     priority = :priority,
                     due_date = :due_date,
                     time_spent = :time_spent,
-                    action_plan = :action_plan
+                    action_plan = :action_plan,
+                    image = :image
                 WHERE id = :id
                 AND user_id = :user_id";
 
@@ -89,6 +139,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         ':due_date' => $due_date,
         ':time_spent' => $time_spent,
         ':action_plan' => $action_plan,
+        ':image' => $newImagePath,
         ':id' => $id,
         ':user_id' => $_SESSION['user_id']
         ]);
@@ -102,7 +153,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 ?>
 <h1>Edit Task</h1><!-- edit task page heading -->
 
-<form action="update.php?id=<?= $id ?>" method="post"><!-- Sends to address at action -->
+<form action="update.php?id=<?= $id ?>" method="post" enctype="multipart/form-data"><!-- Sends to address at action -->
 
     <input type="hidden" name="id" value="<?php echo $_GET['id'] ?? ''; ?>"><!-- lets database know when to update -->
 
@@ -110,6 +161,27 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         <label class="form-label">Task Name</label><!-- user can input task name -->
         <input type="text" name="task_name" class="form-control" value="<?= htmlspecialchars($taskName) ?>" required>
         <div class="invalid-feedback">Please enter a task name.</div><!-- gives user a message if field left blank -->
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Current Image</label>
+
+        <?php if (!empty($task['image'])): ?>
+            <img src="<?= htmlspecialchars($task['image']) ?>"
+            alt="Task image" class="img-thumbnail mb-2" style="max-width: 150px; height: auto;">
+
+            <div class="form-check" mt-2>
+                <input class="form-check-input" type="checkbox" name="remove_image" value="1">
+                <label class="form-check-label">Remove image</label>
+            </div>
+        <?php else: ?>
+            <p class="text-muted">No image uploaded.</p>
+        <?php endif; ?>
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Upload New Image</label>
+        <input type="file" name="image" class="form-control">
     </div>
 
     <div class="mb-3">
