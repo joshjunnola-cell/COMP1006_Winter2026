@@ -1,7 +1,7 @@
 <?php
 require "includes/connect.php";
-require "includes/auth.php";
 require "includes/header.php"; 
+require "includes/auth.php";
 
 // make sure we received an ID - repurposed code from week 6 lesson 4
 if (!isset($_GET['id'])|| empty($_GET['id'])) {
@@ -11,8 +11,33 @@ if (!isset($_GET['id'])|| empty($_GET['id'])) {
 
 $id = $_GET['id'];
 
+// fetches deleted task to see if it has an image to delete
+$sql = "SELECT image 
+        FROM tasks
+        WHERE id = :id
+        AND user_id = :user_id";
+
+$stmt = $pdo -> prepare($sql);
+$stmt->execute([
+    ':id' => $id,
+    ':user_id' => $_SESSION['user_id']
+]);
+
+$task = $stmt->fetch(PDO::FETCH_ASSOC);
+
+// no task, redirect
+if (!$task) {
+    header("Location: index.php");
+    exit;
+}
+
 // if user confirms delete task
 if ($_SERVER["REQUEST_METHOD"] === "POST"){ 
+
+    //deletes image file if exists
+    if(!empty($task['image']) && file_exists($task['image'])) {
+        unlink($task['image']);
+    }
 
     $sql = "DELETE from tasks 
             WHERE id = :id
