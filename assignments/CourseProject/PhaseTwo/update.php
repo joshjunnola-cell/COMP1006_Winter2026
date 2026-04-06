@@ -1,7 +1,7 @@
 <?php
 require "includes/connect.php";
-require "includes/header.php"; 
-require "includes/auth.php";
+require "includes/auth.php"; // run before html
+require "includes/header.php";
 
 // handles get request
 // if there is no id, redirects user
@@ -111,7 +111,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             $extension = pathinfo($file['name'], PATHINFO_EXTENSION);
             $safeFileName = uniqid('img', true) . '.' . strtolower($extension);
 
-            $destination = "uploads/" . $safeFileName;
+            $destination = __DIR__ . "/uploads/" . $safeFileName;
 
             move_uploaded_file($file['tmp_name'], $destination);
 

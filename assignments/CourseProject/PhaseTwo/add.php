@@ -1,8 +1,8 @@
 <!-- Page allows users to add new tasks, also throws up warning messages if something has gone wrong. -->
 <?php
 require "includes/connect.php";
+require "includes/auth.php"; // run before html
 require "includes/header.php";
-require "includes/auth.php";
 
 // For initializing variable
 $errors = [];
@@ -51,8 +51,9 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $file = $_FILES['image'];
 
     //checks if image was uploaded, error message if not
-    if (!isset($_FILES['image'])) {
-        $errors[] = "No file was uploaded.";
+    if ($file['error'] === UPLOAD_ERR_NO_FILE) {
+        $errors[] = "Please upload an image.";
+
     } else {
         if ($file["error"] != UPLOAD_ERR_OK) {
             $errors[] = "There was an error uploading the image";
@@ -80,7 +81,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     //if any errors, diplay them and stop script
 
     if (!empty($errors)) {
-        echo "<h2> Upload Failed</h2>";
+        echo "<h2>Upload Failed</h2>";
         echo "<ul>";
 
         foreach ($errors as $error) {
@@ -88,7 +89,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         }
 
         echo "</ul>";
-        exit;
     }
 
     //get the file extension

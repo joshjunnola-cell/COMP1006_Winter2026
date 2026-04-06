@@ -1,7 +1,7 @@
 <?php
 require "includes/connect.php";
+require "includes/auth.php"; // run before html
 require "includes/header.php";
-require "includes/auth.php";
 
 // to fetch all tasks from database ordered by due date
 // orders by due date so the user knows whats coming up soonest.
@@ -28,7 +28,7 @@ $tasks = $stmt->fetchAll();
     <tbody>
         <?php if (empty($tasks)): ?><!-- placeholder to let user know to add tasks -->
             <tr>
-                <td colspan="6" class="text-center text-muted">
+                <td colspan="7" class="text-center text-muted">
                     No Tasks found. Add one to get started!
                 </td>
             </tr>

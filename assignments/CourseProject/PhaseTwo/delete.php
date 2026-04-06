@@ -1,7 +1,7 @@
 <?php
 require "includes/connect.php";
-require "includes/header.php"; 
-require "includes/auth.php";
+require "includes/auth.php"; // run before html
+require "includes/header.php";
 
 // make sure we received an ID - repurposed code from week 6 lesson 4
 if (!isset($_GET['id'])|| empty($_GET['id'])) {
