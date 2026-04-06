@@ -7,6 +7,12 @@ require "includes/connect.php";
 // Include the site header (navigation, Bootstrap, etc.)
 require "includes/header.php";
 
+//sends logged in users back to index page if they try to manually visit register page
+if (!empty($_SESSION['user_id'])) {
+    header("Location: index.php");
+    exit;
+}
+
 // Array to store validation errors
 $errors = [];
 
