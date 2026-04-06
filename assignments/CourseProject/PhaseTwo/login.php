@@ -2,7 +2,6 @@
 
 // ======= Re-used code from lesson 10 =========
 
-session_start(); //Starts the session
 require "includes/connect.php";
 require "includes/header.php";
 

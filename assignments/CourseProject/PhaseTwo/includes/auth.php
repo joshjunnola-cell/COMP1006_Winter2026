@@ -2,8 +2,6 @@
 
 // ======= Re-used code from lesson 10 =========
 
-session_start();
-
 // Prevent standard browser/proxy caching
 header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
 header("Pragma: no-cache");

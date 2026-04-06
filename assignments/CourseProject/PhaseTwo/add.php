@@ -1,8 +1,8 @@
 <!-- Page allows users to add new tasks, also throws up warning messages if something has gone wrong. -->
 <?php
 require "includes/connect.php";
-require "includes/auth.php";
 require "includes/header.php";
+require "includes/auth.php";
 
 // For initializing variable
 $errors = [];

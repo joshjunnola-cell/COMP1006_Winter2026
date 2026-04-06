@@ -1,5 +1,4 @@
 <?php
-session_start();
 // ======= Re-used code from lesson 10 =========
 
 // Include the database connection so we can interact with the users table

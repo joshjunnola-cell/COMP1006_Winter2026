@@ -3,6 +3,8 @@
 // ======= Re-used code from lesson 10 =========
 
 // Load the auth file so the session starts
+session_start();
+
 require "includes/auth.php";
 
 // Clear all session variables by replacing the session array with an empty one
