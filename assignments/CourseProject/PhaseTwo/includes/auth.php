@@ -1,6 +1,14 @@
 <?php
 
 // ======= Re-used code from lesson 10 =========
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+
+if (!isset($_SESSION['user_id'])) {
+    header("Location: restricted.php");
+    exit;
+}
 
 // Prevent standard browser/proxy caching
 header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
