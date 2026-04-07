@@ -47,29 +47,31 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 ?>
 
-<h1 class="mb-4">Login</h1>
+<div class="container w-50 justify-content-center">
+    <h1 class="mb-4">Login</h1>
 
-<?php if ($error !== ""): ?>
-    <div class="alert alert-danger">
-        <?= htmlspecialchars($error); ?>
-    </div>
-<?php endif; ?>
+    <?php if ($error !== ""): ?>
+        <div class="alert alert-danger">
+            <?= htmlspecialchars($error); ?>
+        </div>
+    <?php endif; ?>
 
-<form action="login.php" method="post" class="card p-4 shadow-sm">
+    <form action="login.php" method="post" class="card p-4 shadow-sm">
 
-    <div class="mb-3">
-        <label class="form-label">Username or Email</label>
-        <input type="text" name="username_or_email" class="form-control" value="<?=  htmlspecialchars($usernameOrEmail) ?>" required>
-    </div>
+        <div class="mb-3">
+            <label class="form-label">Username or Email</label>
+            <input type="text" name="username_or_email" class="form-control" value="<?= htmlspecialchars($usernameOrEmail) ?>" required>
+        </div>
 
-    <div class="mb-3">
-        <label class="form-label">Password</label>
-        <input type="password" name="password" class="form-control" required>
-    </div>
+        <div class="mb-3">
+            <label class="form-label">Password</label>
+            <input type="password" name="password" class="form-control" required>
+        </div>
 
-    <button type="submit" class="btn btn-primary">Login</button>
-    <a href="register.php" class="btn btn-secondary">Sign Up</a>
+        <button type="submit" class="btn btn-primary">Login</button>
+        <a href="register.php" class="btn btn-secondary">Sign Up</a>
 
-</form>
+    </form>
+</div>
 
-    <?php require "includes/footer.php"; ?>
+<?php require "includes/footer.php"; ?>
