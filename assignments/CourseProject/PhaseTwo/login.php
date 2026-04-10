@@ -15,6 +15,7 @@ if (!empty($_SESSION['user_id'])) {
     exit;
 }
 
+//gets login input and checks both fields are filled
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $usernameOrEmail = trim($_POST['username_or_email'] ?? '');
     $password = $_POST['password'] ?? '';
@@ -22,6 +23,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if ($usernameOrEmail === '' || $password === '') {
         $error = "Username/email and password are required.";
     } else {
+        //looks up by username or email
         $sql = "SELECT id, username, email, password
                 FROM users
                 WHERE username = :login OR email = :login
@@ -30,9 +32,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $stmt->bindParam(':login', $usernameOrEmail);
         $stmt->execute();
 
+        //if record exists it is fetched
         $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
+        //verifies password
         if ($user && password_verify($password, $user['password'])) {
+
+            //regenerates session ID to prevent session fixation attacks
             session_regenerate_id(true);
 
             $_SESSION['user_id'] = $user['id'];
@@ -47,6 +53,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 ?>
 
+<!-- User login Fields -->
 <div class="container w-50 justify-content-center">
     <h1 class="mb-4">Login</h1>
 

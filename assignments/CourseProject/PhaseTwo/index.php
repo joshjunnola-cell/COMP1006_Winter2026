@@ -37,7 +37,7 @@ $tasks = $stmt->fetchAll();
 
         <button class="btn btn-outline-secondary dropdown-toggle" data-bs-toggle="dropdown">Filter</button>
 
-        <ul class="dropdown-menu">
+        <ul class="dropdown-menu"><!-- creates dropdown menu with filter options -->
             <li><a class="dropdown-item" href="?sort=priority">By Priority</a></li>
             <li><a class="dropdown-item" href="?sort=due_date">By Due Date</a></li>
             <li><a class="dropdown-item" href="?sort=time_spent">By Time Spent</a></li>

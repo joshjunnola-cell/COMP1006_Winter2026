@@ -1,6 +1,6 @@
 </div>
 
-
+<!-- bootstrap js for buttons to switch when user logs in -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
 </body><!-- Closing all enclosing fields -->
 </html>

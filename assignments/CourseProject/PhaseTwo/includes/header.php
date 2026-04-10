@@ -25,6 +25,7 @@ if (session_status() === PHP_SESSION_NONE) {
 
             <?php if (!empty($_SESSION['user_id'])): ?>
 
+                <!-- when logged in this is added to navbar -->
                 <ul class="navbar-nav me-auto d-flex align-items-center">
                     <li class="nav-item">
                         <a class="nav-link" href="add.php">Add A Task</a>

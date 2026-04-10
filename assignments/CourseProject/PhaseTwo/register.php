@@ -160,6 +160,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 ?>
 
+<!-- User registration fields -->
 <main class="container mt-4">
 
     <h1 class="mb-4">Register</h1>
@@ -208,7 +209,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <input type="password" name="confirm_password" class="form-control" required>
         </div>
 
-        <!-- reCAPTCHA key to link server to users -->
+        <!-- reCAPTCHA key to link server to users - reference links at top -->
         <div class="g-recaptcha mb-3" data-sitekey="6Ld40K8sAAAAAFEbWWHntmn1-mgULykInT7ddnj0"></div>
         <button type="submit" class="btn btn-success">Create Account</button>
     

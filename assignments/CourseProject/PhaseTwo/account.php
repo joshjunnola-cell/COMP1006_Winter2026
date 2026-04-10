@@ -136,6 +136,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['delete_account'])) {
     exit;
 }
 
+//UPDATE ACCOUNT FIELDS
 ?>
 <div class="container w-50 justify-content-center">
 
@@ -188,7 +189,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['delete_account'])) {
         <button class="btn btn-primary">Save Changes</button>
 
     </form>
-
+    
+    <!-- DELETE account button -->
     <form method="post" class="container card p-4 border-danger text-center w-75 justify-content-center">
         <h3 class="text-danger">Delete Account</h3>
         <p>This action will <em>permanently</em> delete your account and <strong>all</strong> tasks.</p>
