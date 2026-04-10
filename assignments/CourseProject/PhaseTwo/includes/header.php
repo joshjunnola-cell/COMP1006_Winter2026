@@ -18,44 +18,54 @@ if (session_status() === PHP_SESSION_NONE) {
 </head>
 
 <body><!-- Body info including nav with bootstrap for styling and spacing -->
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-4">
-    <div class="container-fluid">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-4">
+        <div class="container-fluid">
 
-        <a class="navbar-brand" href="index.php">Task Tracker</a>
+            <a class="navbar-brand" href="index.php">Task Tracker</a>
 
-        <!-- RIGHT SIDE NAV which changes when logged in -->
-        <ul class="navbar-nav ms-auto">
+            <?php if (!empty($_SESSION['user_id'])): ?>
 
-            <?php if (!isset($_SESSION['user_id'])): ?>
-
-                <li class="nav-item">
-                    <a class="nav-link" href="login.php">Login</a>
-                </li>
-
-                <li class="nav-item">
-                    <a class="nav-link" href="register.php">Register</a>
-                </li>
-
-            <?php else: ?>
-
-                <li class="nav-item d-flex align-items-center me-3 text-white">
-                    Welcome, <?= htmlspecialchars($_SESSION['username']) ?>
-                </li>
-
-                <li class="nav-item">
-                    <a class="nav-link" href="account.php">Account</a>
-                </li>
-
-                <li class="nav-item">
-                    <a class="nav-link text-danger" href="logout.php">Logout</a>
-                </li>
+                <ul class="navbar-nav me-auto d-flex align-items-center">
+                    <li class="nav-item">
+                        <a class="nav-link" href="add.php">Add A Task</a>
+                    </li>
+                </ul>
 
             <?php endif; ?>
 
-        </ul>
+            <!-- RIGHT SIDE NAV which changes when logged in -->
+            <ul class="navbar-nav ms-auto">
 
-    </div>
-</nav>
+                <?php if (empty($_SESSION['user_id'])): ?>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="login.php">Login</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="register.php">Register</a>
+                    </li>
+
+                <?php else: ?>
+
+                    <li class="nav-item d-flex align-items-center me-3 text-white">
+                        Welcome, <?= htmlspecialchars($_SESSION['username']) ?>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="account.php">Account</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link text-danger" href="logout.php">Logout</a>
+                    </li>
+
+                <?php endif; ?>
+
+            </ul>
+
+        </div>
+    </nav>
 
 
     <div class="container-fluid">
