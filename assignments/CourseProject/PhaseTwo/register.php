@@ -44,6 +44,24 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Server-side Validation
     // -----------------------------
 
+    // variable to check reCAPTCHA
+    $recaptcha = $_POST['g-recaptcha-response'] ?? '';
+
+    // check if recaptcha was completed
+    if (!$recaptcha) {
+
+        $errors[] = "Complete the reCAPTCHA to register.";      
+    }else {
+        $secret = "6Ld40K8sAAAAAF0Bk2DhZVn0BitHgTlWvoVyZ_BM";
+
+        $response = file_get_contents("https://www.google.com/recaptcha/api/siteverify?secret=$secret&response=$recaptcha");
+        $result = json_decode($response);
+
+        if(!$result->success) {
+            $errors[] = "reCAPTCHA verification failed. Try again!";
+        }
+    }
+
     // Check that a username was entered
     if ($username === '') {
         $errors[] = "Username is required.";
@@ -184,9 +202,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <input type="password" name="confirm_password" class="form-control" required>
         </div>
 
+        <!-- reCAPTCHA key to link server to users -->
+        <div class="g-recaptcha mb-3" data-sitekey="6Ld40K8sAAAAAFEbWWHntmn1-mgULykInT7ddnj0"></div>
         <button type="submit" class="btn btn-success">Create Account</button>
     
     </form>
 </main>
 
+<script src="https://www.google.com/recaptcha/api.js" async defer></script>
 <?php require "includes/footer.php"; ?>
