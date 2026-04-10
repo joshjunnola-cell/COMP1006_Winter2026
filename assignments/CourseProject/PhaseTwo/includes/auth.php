@@ -1,6 +1,7 @@
 <?php
 
 // ======= Re-used code from lesson 10 =========
+// starts a session if none
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }

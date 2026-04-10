@@ -30,6 +30,11 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['update_account'])) {
     if ($username === "")
         $errors[] = "Username is required!";
 
+    //min username length requirement
+    if (strlen($username) < 3) {
+        $errors[] = "Username must be at least 3 characters.";
+    }
+
     if ($email === "" || !filter_var($email, FILTER_VALIDATE_EMAIL)) {
         $errors[] = "Valid email required!";
     }
@@ -51,7 +56,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['update_account'])) {
     //checks databse if username or email already exists
     $sql = "SELECT id
             FROM users
-            WHERE (username = :username OR email = :email
+            WHERE (username = :username OR email = :email)
             AND id != :id";
 
     $stmt = $pdo->prepare($sql);
@@ -106,8 +111,10 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['delete_account'])) {
 
     // loops if any images and a file exists remove
     foreach ($images as $img) {
-        if (!empty($img['image']) && file_exists($img['image'])) {
-            unlink($img['image']);
+        $path = __DIR__ . "/" . $img['image'];
+
+        if (!empty($img['image']) && file_exists($path)) {
+            unlink($path);
         }
     }
 
