@@ -152,8 +152,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         <div class="invalid-feedback">Please enter a task name.</div><!-- gives user a message if field left blank -->
     </div>
 
-    <div class="mb-3">
-        <label>Priority</label> <!-- Allows user to select priority level of task -->
+    <div class="mb-3" style="cursor: pointer;">
+        <label style="user-select: none;">Priority</label> <!-- Allows user to select priority level of task -->
         <select name="priority" class="form-select" required>
             <option value="">Priority Level</option>
             <option value="high">High Priority</option>
@@ -163,9 +163,9 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         <div class="invalid-feedback">Please select a priority level.</div><!-- gives user a message if field left blank -->
     </div>
 
-    <div class="mb-3">
-        <label class="form-label">Due Date</label><!-- input for due date -->
-        <input type="date" name="due_date" class="form-control" required>
+    <div class="mb-3" onclick="document.getElementById('dueDate').showPicker();" style="cursor: pointer;">
+        <label class="form-label" style="user-select: none;">Due Date</label><!-- input for due date -->
+            <input type="date" id="dueDate" name="due_date" class="form-control" required>
         <div class="invalid-feedback">Please choose a valid due date.</div><!-- gives user a message if field left blank -->
     </div>
 
