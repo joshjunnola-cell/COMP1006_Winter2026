@@ -44,6 +44,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Server-side Validation
     // -----------------------------
 
+    /* 
+    Used following websites as reference to complete and get keys for recaptcha 
+    https://docs.cloud.google.com/recaptcha/docs/create-key-website
+    https://docs.cloud.google.com/recaptcha/docs 
+    */
+
     // variable to check reCAPTCHA
     $recaptcha = $_POST['g-recaptcha-response'] ?? '';
 

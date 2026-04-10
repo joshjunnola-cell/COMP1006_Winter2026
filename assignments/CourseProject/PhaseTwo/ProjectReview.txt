@@ -1,0 +1,29 @@
+Project Review - PHASE TWO
+
+Challenges Encountered
+======================
+One of the biggest challenges for me was getting my “Add a Task” button to actually show up once a user logged in. I kept thinking it was a PHP or session issue, but 
+it turned out to be Bootstrap being picky about needing a proper ul/li structure. It was such a small thing, but it completely blocked me until I figured it out.
+
+Another challenge was setting up my SQL queries correctly. This had taken way longer than I expected. It was frustrating because the fix ended up being simple, but 
+because it had taken me so long and I needed to figure out the fix to move forward it felt really great once I did get it all sorted out!
+
+Successes Achieved
+==================
+Two things that stand out the most for me in the second phase. First, I’m really happy with how the dynamic navbar buttons turned out. Watching the navbar switch
+between login, logout, and account options depending on the user’s state feels clean and professional, and it took some careful logic to get it right.
+
+Second, getting the database connection issue solved was a huge win. It was holding everything up, and once it was fixed, the rest of the project finally started to
+fall into place. It felt like a major breakthrough even though the fix itself was small.
+
+Lessons Learned
+===============
+I learned a lot about debugging, especially when the problem isn’t where you think it is. Sometimes the issue was PHP, sometimes SQL, sometimes Bootstrap, and 
+sometimes just me overlooking something small. I also learned a lot about structuring SQL queries properly, not just making them work, but making them secure and 
+organized. Those two areas feel like the biggest takeaways from this project. The experience debugging was especially a major takeaway.
+
+Next Steps / Future Improvements
+================================
+Realistically speaking if I were to keep building this app, the first thing I’d do is overhaul the UI styling. As I now understand what people mean when they say 
+something looks “bootstrappy.” I’d like to make the design feel more custom and polished. I’d also add categories for tasks, since that would make the app more useful 
+and organized for users.
