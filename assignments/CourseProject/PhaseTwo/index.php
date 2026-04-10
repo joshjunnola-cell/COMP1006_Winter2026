@@ -9,9 +9,42 @@ $sql = "SELECT * FROM tasks WHERE user_id = :user_id ORDER BY due_date ASC";
 $stmt = $pdo->prepare($sql);
 $stmt->execute([':user_id' => $_SESSION['user_id']]);
 $tasks = $stmt->fetchAll();
+
+// sql array sorting logic for priority, due date or time spent
+$sort = $_GET['sort'] ?? 'due_date';
+
+$allowed = ['priority', 'due_date', 'time_spent'];
+
+//if not set, default is sorted by due date
+if (!in_array($sort, $allowed)) {
+    $sort = 'due_date';
+}
+
+$sql = "SELECT *
+        FROM tasks
+        WHERE user_id = :user_id
+        ORDER BY $sort ASC";
+
+$stmt = $pdo->prepare($sql);
+$stmt->execute([':user_id' => $_SESSION['user_id']]);
+$tasks = $stmt->fetchAll();
 ?>
 
-<h1 class="mb-4">Your Tasks</h1><!-- lists current tasks -->
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h1 class="mb-4">Your Tasks</h1><!-- lists current tasks -->
+
+    <div class="dropdown">
+
+        <button class="btn btn-outline-secondary dropdown-toggle" data-bs-toggle="dropdown">Filter</button>
+
+        <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="?sort=priority">By Priority</a></li>
+            <li><a class="dropdown-item" href="?sort=due_date">By Due Date</a></li>
+            <li><a class="dropdown-item" href="?sort=time_spent">By Time Spent</a></li>
+        </ul class="dropdown-menu-end">
+    </div>
+
+</div>
 
 <table class="table table-striped table-bordered align-middle"><!-- setups up how the table will look -->
     <thead class="table-dark">
